@@ -151,10 +151,12 @@ def main():
     T_velo_cam0 = np.linalg.inv(T_cam0_velo)
     T_cam2_cam0 = T_cam2_velo @ T_velo_cam0
     T_cam3_cam0 = T_cam3_velo @ T_velo_cam0
+    T_cam0_cam2 = np.linalg.inv(T_cam2_cam0)
+    T_cam0_cam3 = np.linalg.inv(T_cam3_cam0)
 
     rr.log("world/cam0", rr.Transform3D(translation=[0, 0, 0]))
-    rr.log("world/cam2", rr.Transform3D(translation=T_cam2_cam0[:3, 3], mat3x3=T_cam2_cam0[:3, :3]))
-    rr.log("world/cam3", rr.Transform3D(translation=T_cam3_cam0[:3, 3], mat3x3=T_cam3_cam0[:3, :3]))
+    rr.log("world/cam2", rr.Transform3D(translation=T_cam0_cam2[:3, 3], mat3x3=T_cam0_cam2[:3, :3]))
+    rr.log("world/cam3", rr.Transform3D(translation=T_cam0_cam3[:3, 3], mat3x3=T_cam0_cam3[:3, :3]))
 
     num_frames = min(len(raw), args.frames)
     if num_frames <= 0:
