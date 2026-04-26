@@ -1,0 +1,5 @@
+imageio[ffmpeg]
+imageio-ffmpeg
+av
+matplotlib
+numpy
